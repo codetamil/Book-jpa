@@ -1,21 +1,35 @@
 package com.sai.commonservice;
 
+import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.aspectj.lang.annotation.Aspect;
 
 
-@EnableAspectJAutoProxy
+
+
+
+@Aspect
 public class LoggingAspect {
 	
-	@After("execution(* com.janani.service.UserService.*(..))")
+	
+	private static final Logger LOGGER = Logger.getLogger(LoggingAspect.class);
+	
+	@After("execution(* com.janani.controller.AuthenticationController.*(..))")
 		
     public void logAfterAllMethods(JoinPoint joinPoint) 
-    {
+        {
+		
+		LOGGER.info("entering AuthController Methods");
         System.out.println("****LoggingAspect.logAfterAllMethods() : " + joinPoint.getSignature().getName());
     }
      
+	@After("execution(* com.janani.controller.AuthenticationController.login(..))")
+    public void logAfterLogin(JoinPoint joinPoint) 
+    {
+		LOGGER.info("Entering login");
+        System.out.println("****LoggingAspect.logAfterLogin() : " + joinPoint.getSignature().getName());
+}
     
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,8 @@ import com.janani.util.EmailUtil;
 @Controller
 @RequestMapping("auth")
 public class AuthenticationController {
+	
+	
 
 	@Autowired
 	private UserService userService;
@@ -63,10 +66,11 @@ public class AuthenticationController {
 
 			userService.register(user);
 			// Send Registration Notification Mail
-			String subject = "Your account has been created";
+		/*	String subject = "Your account has been created";
 			String body = "Welcome to Revature ! You can login to your account !";
 			emailUtil.send(user.getEmail(), subject, body);
-			return "redirect:../";
+			return "redirect:../";*/
+			return "home";
 		} catch (Exception e) {
 			e.printStackTrace();
 			modelMap.addAttribute("ERROR_MESSAGE", e.getMessage());
@@ -74,4 +78,11 @@ public class AuthenticationController {
 		}
 
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		System.out.println("Logging out");
+		session.invalidate();
+		return "home";
+}
 }

@@ -43,7 +43,7 @@
 						<li><a href="../users/changepassword">Change Password ! </a></li>
 
 					</ul></li>
-				<li><a href="../auth/Logout">
+				<li><a href="../auth/logout">
 						<p>Log out</p>
 				</a></li>
 				<li class="separator hidden-lg hidden-md"></li>
